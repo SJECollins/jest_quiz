@@ -74,6 +74,9 @@ describe("Check gameVars object", () => {
 
 describe("Test startGame calls displayQuestion", () => {
     beforeEach(() => {
+        gameVars.currentQuestion = "";
+        gameVars.correctAnswer = "";
+        gameVars.answerArray = [];
         startGame();
     });
     test("Current question is updated", () => {
@@ -84,5 +87,16 @@ describe("Test startGame calls displayQuestion", () => {
     });
     test("Answer array is updated", () => {
         expect(gameVars.answerArray).toEqual(["answer 1", "answer 2", "answer 3", "answer 4"]);
+    });
+    test("Question in DOM is updated", () => {
+        expect(document.getElementById("question").innerHTML).toEqual(gameVars.currentQuestion);
+    });
+    test("Answers in DOM are updated", () => {
+        for (let i = 0; i < 4; i++) {
+            expect(document.getElementById("answer" + [i]).innerHTML).toEqual(gameVars.answerArray[i]);
+        }
+    });
+    test("Correct answer to have 'correct' class in DOM", () => {
+        expect(document.getElementById("answer" + [gameVars.correctAnswer]).classList).toContain("correct");
     });
 });

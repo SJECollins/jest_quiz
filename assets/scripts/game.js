@@ -1,4 +1,5 @@
 const startBtn = document.getElementById("start");
+const questionDisplay = document.getElementById("question");
 
 // Question array
 let questionArray = [
@@ -25,7 +26,6 @@ let gameVars = {
 };
 
 function startGame() {
-    console.log("Game starting");
     displayQuestion();
 }
 
@@ -33,6 +33,14 @@ function displayQuestion() {
     gameVars.currentQuestion = questionArray[gameVars.questionNum]["question"];
     gameVars.answerArray = questionArray[gameVars.questionNum]["answers"];
     gameVars.correctAnswer = questionArray[gameVars.questionNum]["correct"];
+
+    document.getElementById("question").innerHTML = gameVars.currentQuestion;
+    for (let i = 0; i < gameVars.answerArray.length; i++) {
+        if (i == gameVars.correctAnswer) {
+            document.getElementById("answer" + [i]).classList.add("correct");
+        }
+        document.getElementById("answer" + [i]).innerHTML = gameVars.answerArray[i];
+    }
 }
 
 window.onload = () => {
