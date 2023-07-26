@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const { gameVars } = require("../game");
+const { gameVars, startGame, displayQuestion } = require("../game");
 
 beforeAll(() => {
     let fs = require("fs");
@@ -14,7 +14,7 @@ beforeAll(() => {
 
 describe("Check initial DOM contents", () => {
     test("Question number element exists and is '0' before game starts", () => {
-        expect(document.getElementById("questionNum").innerHTML).toBe("0");
+        expect(document.getElementById("question-num").innerHTML).toBe("0");
     });
     test("Score element exists and is '0' before game starts", () => {
         expect(document.getElementById("score").innerHTML).toBe("0");
@@ -69,5 +69,20 @@ describe("Check gameVars object", () => {
     });
     test("Answer array in gameVars equals an empty array", () => {
         expect(gameVars.answerArray).toEqual([]);
+    });
+});
+
+describe("Test startGame calls displayQuestion", () => {
+    beforeEach(() => {
+        startGame();
+    });
+    test("Current question is updated", () => {
+        expect(gameVars.currentQuestion).toEqual("This is the question");
+    });
+    test("Correct answer is updated", () => {
+        expect(gameVars.correctAnswer).toEqual(3);
+    });
+    test("Answer array is updated", () => {
+        expect(gameVars.answerArray).toEqual(["answer 1", "answer 2", "answer 3", "answer 4"]);
     });
 });

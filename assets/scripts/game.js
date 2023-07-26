@@ -1,3 +1,5 @@
+const startBtn = document.getElementById("start");
+
 // Question array
 let questionArray = [
     {
@@ -8,7 +10,7 @@ let questionArray = [
             "answer 3",
             "answer 4",
         ],
-        correct: "answer 1",
+        correct: 3,
     },
 ];
 
@@ -22,5 +24,20 @@ let gameVars = {
     answerArray: [],
 };
 
+function startGame() {
+    console.log("Game starting");
+    displayQuestion();
+}
+
+function displayQuestion() {
+    gameVars.currentQuestion = questionArray[gameVars.questionNum]["question"];
+    gameVars.answerArray = questionArray[gameVars.questionNum]["answers"];
+    gameVars.correctAnswer = questionArray[gameVars.questionNum]["correct"];
+}
+
+window.onload = () => {
+    startBtn.addEventListener("click", startGame);
+};
+
 // Export modules for testing
-module.exports = { gameVars, };
+module.exports = { gameVars, startGame, displayQuestion };
