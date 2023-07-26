@@ -88,6 +88,9 @@ describe("Test startGame calls displayQuestion", () => {
     test("Answer array is updated", () => {
         expect(gameVars.answerArray).toEqual(["answer 1", "answer 2", "answer 3", "answer 4"]);
     });
+    test("Question number in DOM is updated", () => {
+        expect(document.getElementById("question-num").innerHTML).toEqual("1");
+    });
     test("Question in DOM is updated", () => {
         expect(document.getElementById("question").innerHTML).toEqual(gameVars.currentQuestion);
     });
